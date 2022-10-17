@@ -1,0 +1,15 @@
+name: Build Docker Image & push to Docker Hub automatically using GitHub Actions
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: |
+        docker login -u aijp --password dckr_pat_uIL8WwVbLnHNEHjy4fgYaGFeDWU
+        docker build . --file Dockerfile --tag docker.io/aijp/github_action_docker_hub_repo:latest
+        docker push docker.io/aijp/github_action_docker_hub_repo:latest
